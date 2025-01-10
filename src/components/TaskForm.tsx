@@ -7,13 +7,34 @@ interface TaskFormProps {
 function TaskForm({ onAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [titleError, setTitleError] = useState("");
+
+  const validateForm = () => {
+    let isValid = true;
+    setTitleError("");
+
+    if (!title.trim()) {
+      setTitleError("Title is required");
+      isValid = false;
+    } else if (title.trim().length > 100) {
+      setTitleError("Title must be less than 100 characters");
+      isValid = false;
+    }
+
+    return isValid;
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title) return alert("Title is required!");
-    onAddTask({ title, description });
-    setTitle("");
-    setDescription("");
+    
+    if (validateForm()) {
+      onAddTask({ 
+        title: title.trim(), 
+        description: description.trim() 
+      });
+      setTitle("");
+      setDescription("");
+    }
   };
 
   return (
@@ -24,13 +45,25 @@ function TaskForm({ onAddTask }: TaskFormProps) {
             type="text"
             placeholder="Task Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            onChange={(e) => {
+              setTitle(e.target.value);
+              if (titleError) setTitleError("");
+            }}
+            className={`w-full px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              titleError ? 'border-red-500' : 'border-gray-300'
+            }`}
+            aria-invalid={!!titleError}
+            aria-describedby={titleError ? "title-error" : undefined}
           />
+          {titleError && (
+            <p id="title-error" className="mt-1 text-xs text-red-500">
+              {titleError}
+            </p>
+          )}
         </div>
         <div>
           <textarea
-            placeholder="Task Description"
+            placeholder="Task Description (optional)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="w-full px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent h-20 sm:h-24 resize-none"
