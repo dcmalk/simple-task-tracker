@@ -36,9 +36,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-8">
+      <div className="max-w-2xl mx-auto px-2 sm:px-4">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-8 text-center text-gray-800">
           Task Manager
         </h1>
         <div className="bg-white rounded-lg shadow-md">
