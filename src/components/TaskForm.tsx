@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-function TaskForm({ onAddTask }: { onAddTask: (task: { title: string; description: string }) => void }) {
+interface TaskFormProps {
+  onAddTask: (task: { title: string; description: string }) => void;
+}
+
+function TaskForm({ onAddTask }: TaskFormProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
