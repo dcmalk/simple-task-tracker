@@ -16,14 +16,14 @@ interface TaskListProps {
 function TaskList({ tasks, onDelete, onToggleComplete }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <div className="p-4 text-center text-gray-500">
+      <div className="p-6 text-center text-gray-500">
         No tasks available. Add some tasks to get started!
       </div>
     );
   }
 
   return (
-    <div className="p-4">
+    <div className="divide-y divide-gray-200">
       {tasks.map((task) => (
         <TaskItem
           key={task.id}

@@ -36,14 +36,20 @@ function App() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-8">
-      <h1 className="text-2xl font-bold mb-4 text-center">Task Manager</h1>
-      <TaskForm onAddTask={handleAddTask} />
-      <TaskList
-        tasks={tasks}
-        onDelete={handleDeleteTask}
-        onToggleComplete={handleToggleComplete}
-      />
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-2xl mx-auto px-4">
+        <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
+          Task Manager
+        </h1>
+        <div className="bg-white rounded-lg shadow-md">
+          <TaskForm onAddTask={handleAddTask} />
+          <TaskList
+            tasks={tasks}
+            onDelete={handleDeleteTask}
+            onToggleComplete={handleToggleComplete}
+          />
+        </div>
+      </div>
     </div>
   );
 }
